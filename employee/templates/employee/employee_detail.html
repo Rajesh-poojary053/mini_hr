@@ -1,0 +1,190 @@
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(to right, #eef2f3, #8e9eab);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+  }
+
+  h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 6px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .col-6 {
+    width: 50%;
+    padding: 8px 12px;
+  }
+
+  .col-12 {
+    width: 100%;
+    padding: 8px 12px;
+  }
+
+  .label {
+    font-weight: 600;
+    color: #555;
+  }
+
+  .value {
+    color: #222;
+    font-size: 1rem;
+  }
+
+  .status {
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    color: white;
+  }
+
+  .status.active {
+    background-color: #28a745;
+  }
+
+  .status.inactive {
+    background-color: #dc3545;
+  }
+
+  .back-btn {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    padding: 12px 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    color: white;
+    background: #007bff;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background: #0056b3;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  /* Responsive Breakpoint */
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+      margin: 20px;
+    }
+
+    .col-6 {
+      width: 100%;
+      padding: 6px 10px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    .section-title {
+      font-size: 1rem;
+    }
+
+    .back-btn {
+      font-size: 1rem;
+      padding: 10px;
+    }
+  }
+</style>
+
+<div class="container">
+  <h2>👤 Employee Full Details</h2>
+
+  <!-- 📌 Personal Info -->
+  <div class="section-title">📌 Personal Information</div>
+  <div class="row"><div class="col-6 label">Full Name:</div><div class="col-6 value">{{ emp.full_name }}</div></div>
+  <div class="row"><div class="col-6 label">Email:</div><div class="col-6 value">{{ emp.email }}</div></div>
+  <div class="row"><div class="col-6 label">Phone:</div><div class="col-6 value">{{ emp.phone }}</div></div>
+  <div class="row"><div class="col-6 label">Gender:</div><div class="col-6 value">{{ emp.gender }}</div></div>
+  <div class="row"><div class="col-6 label">DOB:</div><div class="col-6 value">{{ emp.dob|date:"M d, Y" }}</div></div>
+  <div class="row"><div class="col-6 label">Address:</div><div class="col-6 value">{{ emp.address }}, {{ emp.city }}, {{ emp.state }}</div></div>
+  <div class="row"><div class="col-6 label">Salary:</div><div class="col-6 value">₹{{ emp.salary }}</div></div>
+  <div class="row"><div class="col-6 label">Date of Joining:</div><div class="col-6 value">{{ emp.doj|date:"M d, Y" }}</div></div>
+  <div class="row"><div class="col-6 label">Status:</div>
+    <div class="col-6">
+      <span class="status {% if emp.is_active %}active{% else %}inactive{% endif %}">
+        {% if emp.is_active %}Active{% else %}Inactive{% endif %}
+      </span>
+    </div>
+  </div>
+
+  <!-- 🏢 Department Info -->
+  <div class="section-title">🏢 Department Details</div>
+  <div class="row"><div class="col-6 label">Department:</div><div class="col-6 value">{{ emp.department }}</div></div>
+  <div class="row"><div class="col-6 label">Designation:</div><div class="col-6 value">{{ emp.designation }}</div></div>
+  <div class="row"><div class="col-6 label">Branch:</div><div class="col-6 value">{{ emp.branch }}</div></div>
+  <div class="row"><div class="col-6 label">Grade:</div><div class="col-6 value">{{ emp.grade }}</div></div>
+  <div class="row"><div class="col-6 label">Category:</div><div class="col-6 value">{{ emp.category }}</div></div>
+
+  <!-- 🕒 Meta Info -->
+  <div class="section-title">📅 Meta Information</div>
+  <div class="row"><div class="col-6 label">Created At:</div><div class="col-6 value">{{ emp.created_at|date:"M d, Y, h:i A" }}</div></div>
+
+  <!-- 🏦 Bank Info -->
+  <div class="section-title">🏦 Bank Details</div>
+  {% if emp.bank %}
+    <div class="row"><div class="col-6 label">Bank Name:</div><div class="col-6 value">{{ emp.bank.bank_name }}</div></div>
+    <div class="row"><div class="col-6 label">Account Number:</div><div class="col-6 value">{{ emp.bank.account_number }}</div></div>
+    <div class="row"><div class="col-6 label">IFSC Code:</div><div class="col-6 value">{{ emp.bank.ifsc_code }}</div></div>
+    <div class="row"><div class="col-6 label">Branch:</div><div class="col-6 value">{{ emp.bank.branch }}</div></div>
+  {% else %}
+    <div class="row"><div class="col-12">No bank details added.</div></div>
+  {% endif %}
+
+  <!-- 📄 Document Info -->
+  <div class="section-title">📄 Uploaded Documents</div>
+  {% if documents %}
+    <ul>
+      {% for doc in documents %}
+        <li>{{ doc.document_type }} - <a href="{{ doc.file.url }}" target="_blank">📂 View</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No documents uploaded.</p>
+  {% endif %}
+
+  <!-- 🔙 Back Button -->
+  <a href="{% url 'employee_list' %}" class="back-btn">← Back to List</a>
+</div>
+{% endblock %}

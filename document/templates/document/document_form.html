@@ -1,0 +1,109 @@
+{% load widget_tweaks %}
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(to right, #f3e5f5, #e1f5fe);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  .upload-card {
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 60px auto;
+    transition: all 0.3s ease;
+  }
+
+  h2 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+  }
+
+  .form-control, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    transition: border 0.3s ease;
+  }
+
+  .form-control:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #007bff;
+    border: none;
+    font-weight: 600;
+    color: white;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
+  }
+
+  .btn-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .btn-link:hover {
+    color: #0056b3;
+  }
+
+  @media (max-width: 768px) {
+    .upload-card {
+      padding: 25px 20px;
+      margin: 40px 15px;
+    }
+  }
+</style>
+
+<div class="upload-card">
+  <h2>📤 Upload Employee Document</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_employee">👤 Select Employee:</label>
+      {{ form.employee|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+      <label for="id_document_type">📌 Document Type:</label>
+      {{ form.document_type|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+      <label for="id_file">📁 Choose File:</label>
+      {{ form.file|add_class:"form-control" }}
+    </div>
+    <button type="submit" class="btn btn-primary">📤 Upload</button>
+    <a href="{% url 'document_list' %}" class="btn btn-link">🔙 Back to List</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!-- otp_email.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your OTP for Mini HR</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f0f2f5; padding: 20px;">
+    <div style="background-color: #ffffff; border-radius: 8px; padding: 20px; max-width: 600px; margin: auto;">
+        <h2 style="color: #2a9d8f;">🔐 Mini HR Login</h2>
+        <p>Hello <strong>{{ hr_name }}</strong> from <strong>{{ company_name }}</strong>,</p>
+        <p>Your One Time Password (OTP) for login is:</p>
+        <p style="font-size: 24px; font-weight: bold; color: #e76f51;">{{ otp }}</p>
+        <p>This OTP is valid for only a short period. Do not share it with anyone.</p>
+        <hr>
+        <p style="font-size: 12px; color: #555;">This is an auto-generated email from Mini HR. Please do not reply.</p>
+    </div>
+</body>
+</html>

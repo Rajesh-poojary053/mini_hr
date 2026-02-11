@@ -1,0 +1,15 @@
+
+
+{% block title %}Add Designation{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>➕ Add Designation</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- ✅ This renders the actual form fields -->
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'designation_list' %}" class="btn btn-secondary">Back</a>
+  </form>
+</div>
+{% endblock %}

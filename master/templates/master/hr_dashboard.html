@@ -1,0 +1,139 @@
+{% block title %}🎯 Master Dashboard{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #f8f9fa, #dbeafe, #fef9c3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  h2.text-center {
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+    color: #4a1ea0;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    border-radius: 24px;
+    background: linear-gradient(145deg, #ffffff, #e0f7fa);
+    border: none;
+    box-shadow: 0 12px 30px rgba(74, 30, 160, 0.15);
+    padding: 2rem;
+  }
+
+  .card h4 {
+    font-weight: 700;
+    color: #7b2ff7;
+    border-bottom: 3px dashed #f107a3;
+    padding-bottom: 10px;
+    margin-bottom: 1.8rem;
+    font-size: 1.6rem;
+  }
+
+  .list-group {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .list-group-item {
+    font-size: 1.15rem;
+    font-weight: 600;
+    background-color: #f5f0ff;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #4a1ea0;
+    cursor: pointer;
+  }
+
+  .list-group-item:hover {
+    background: #f0defb;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(123, 47, 247, 0.25);
+  }
+
+  .btn-outline-primary {
+    font-weight: 700;
+    border-radius: 24px;
+    padding: 0.4rem 1.3rem;
+    font-size: 0.95rem;
+    border: 2px solid #7b2ff7;
+    color: #7b2ff7;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(123, 47, 247, 0.2);
+    text-decoration: none;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #7b2ff7;
+    color: white;
+    box-shadow: 0 10px 30px rgba(241, 7, 163, 0.6);
+  }
+
+  @media (max-width: 576px) {
+    .card {
+      padding: 1.5rem 1rem;
+    }
+
+    h2.text-center {
+      font-size: 1.8rem;
+    }
+
+    .card h4 {
+      font-size: 1.3rem;
+    }
+
+    .list-group-item {
+      font-size: 1rem;
+      padding: 0.6rem 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .btn-outline-primary {
+      margin-top: 8px;
+    }
+  }
+</style>
+
+<h2 class="text-center mt-4">🎯 Master Table Dashboard</h2>
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <h4>🔧 Manage Master Tables</h4>
+    <ul class="list-group">
+      <li class="list-group-item" onclick="location.href='{% url 'add_department' %}'">
+        ➕ Add Department
+        <a href="{% url 'add_department' %}" class="btn btn-outline-primary btn-sm" tabindex="-1">Open</a>
+      </li>
+      <li class="list-group-item" onclick="location.href='{% url 'add_designation' %}'">
+        ➕ Add Designation
+        <a href="{% url 'add_designation' %}" class="btn btn-outline-primary btn-sm" tabindex="-1">Open</a>
+      </li>
+      <li class="list-group-item" onclick="location.href='{% url 'add_grade' %}'">
+        ➕ Add Grade
+        <a href="{% url 'add_grade' %}" class="btn btn-outline-primary btn-sm" tabindex="-1">Open</a>
+      </li>
+      <li class="list-group-item" onclick="location.href='{% url 'add_branch' %}'">
+        ➕ Add Branch
+        <a href="{% url 'add_branch' %}" class="btn btn-outline-primary btn-sm" tabindex="-1">Open</a>
+      </li>
+      <li class="list-group-item" onclick="location.href='{% url 'add_category' %}'">
+        ➕ Add Category
+        <a href="{% url 'add_category' %}" class="btn btn-outline-primary btn-sm" tabindex="-1">Open</a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

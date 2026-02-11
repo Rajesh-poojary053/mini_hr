@@ -1,0 +1,111 @@
+{% block content %}
+<style>
+  /* Body Background */
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* Container Styling */
+  .container {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 600px;
+    margin: 60px auto;
+    color: #fff;
+  }
+
+  /* Header Styling */
+  h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px #333;
+    font-weight: 700;
+  }
+
+  /* Form Elements Styling */
+  form label {
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  form input,
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+
+  /* Buttons Styling */
+  .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .btn-success {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    border: none;
+    color: white;
+  }
+
+  .btn-success:hover {
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.03);
+  }
+
+  .btn-info {
+    background-color: #17a2b8;
+    color: white;
+  }
+
+  .btn-info:hover {
+    background-color: #138496;
+    transform: scale(1.03);
+  }
+</style>
+
+<div class="container mt-4">
+  <h2>Add / Edit Employee</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">✅ Save</button>
+    <a href="{% url 'employee_list' %}" class="btn btn-info">👥 View Employee List</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">🔙 Back to Dashboard</a>
+  </form>
+</div>
+{% endblock %}

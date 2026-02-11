@@ -1,0 +1,177 @@
+{% block content %}
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(-45deg, #4facfe, #00f2fe, #43e97b, #38f9d7);
+    background-size: 400% 400%;
+    animation: gradient 12s ease infinite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  @keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px 40px;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    max-width: 650px;
+    width: 95%;
+    text-align: center;
+  }
+
+  h2 {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+
+  .list-group {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .list-group-item {
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    padding: 12px 20px;
+  }
+
+  .list-group-item strong {
+    font-size: 1.3rem;
+  }
+
+  .btn-dark {
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  .btn-dark:hover {
+    background-color: #444;
+    transform: scale(1.05);
+  }
+
+  #chartContainer {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+  }
+
+  canvas {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Responsive Tweaks */
+  @media (max-width: 600px) {
+    .container {
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .list-group-item {
+      font-size: 1rem;
+      padding: 10px 16px;
+    }
+
+    .list-group-item strong {
+      font-size: 1.2rem;
+    }
+
+    .btn-dark {
+      font-size: 0.95rem;
+      padding: 10px;
+    }
+  }
+</style>
+
+<div class="container">
+  <h2>📊 Employee Statistics</h2>
+  <hr>
+  <ul class="list-group">
+    <li class="list-group-item">👥 Total Employees: <strong>{{ total }}</strong></li>
+    <li class="list-group-item text-success">✅ Active Employees: <strong>{{ active }}</strong></li>
+    <li class="list-group-item text-danger">❌ Inactive Employees: <strong>{{ inactive }}</strong></li>
+  </ul>
+
+  <!-- Pie Chart -->
+  <div id="chartContainer">
+    <canvas id="employeePieChart"></canvas>
+  </div>
+
+  <a href="{% url 'employee_list' %}" class="btn btn-dark">← Back to Employee List</a>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('employeePieChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Active', 'Inactive'],
+      datasets: [{
+        label: 'Employee Status',
+        data: [{{ active }}, {{ inactive }}],
+        backgroundColor: ['#00e676', '#ff1744'],
+        borderColor: ['#ffffff', '#ffffff'],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#fff',
+            font: {
+              size: 14,
+              weight: 'bold'
+            }
+          }
+        },
+        title: {
+          display: true,
+          text: 'Active vs Inactive Employees',
+          color: '#fff',
+          font: {
+            size: 18,
+            weight: 'bold'
+          }
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

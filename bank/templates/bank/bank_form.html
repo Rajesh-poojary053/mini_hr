@@ -1,0 +1,119 @@
+{% block content %}
+<style>
+  /* Animated Gradient Background */
+  body {
+    background: linear-gradient(135deg, #00b4db, #0083b0, #43cea2, #185a9d);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Form Container Styling */
+  .form-container {
+    background: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 35px 30px;
+    margin: 60px auto;
+    max-width: 600px;
+    color: #fff;
+    width: 90%;
+    box-sizing: border-box;
+  }
+
+  h2 {
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 3px #000;
+    text-align: center;
+  }
+
+  .form-control,
+  .form-container select,
+  .form-container textarea,
+  .form-container input[type="text"],
+  .form-container input[type="number"] {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    color: #333;
+    background: rgba(255,255,255,0.95);
+  }
+
+  .btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 10px 18px;
+    transition: 0.3s ease;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+    transform: scale(1.03);
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+  }
+
+  .btn-secondary:hover {
+    transform: scale(1.03);
+    background-color: #5a6268;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 576px) {
+    .btn-group {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container mt-4">
+  <div class="form-container">
+    <h2>{% if form.instance.pk %}✏️ Edit{% else %}➕ Add{% endif %} Bank Details</h2>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="btn-group">
+        <button type="submit" class="btn btn-success">💾 Save</button>
+        <a href="{% url 'bank_list' %}" class="btn btn-secondary">🔙 Back to List</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

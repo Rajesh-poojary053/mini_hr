@@ -1,0 +1,135 @@
+{% block title %}🏢 Branch List{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #e0f2fe, #fef3c7, #fae8ff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  h2 {
+    color: #1e3a8a;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.08);
+  }
+
+  .btn-success {
+    background-color: #10b981;
+    border: none;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 10px;
+  }
+
+  .btn-success:hover {
+    background-color: #059669;
+    transform: scale(1.05);
+  }
+
+  .btn-secondary {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  .list-group-item {
+    background-color: #f9fafb;
+    font-weight: 600;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .list-group-item:hover {
+    background: #e0f7fa;
+    transform: translateY(-2px);
+  }
+
+  .btn-sm {
+    border-radius: 8px;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: 0.2s ease;
+  }
+
+  .btn-primary {
+    background-color: #3b82f6;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+
+  .btn-danger {
+    background-color: #ef4444;
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #dc2626;
+  }
+
+  .no-branch-msg {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .list-group-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .btn-sm {
+      margin-top: 10px;
+    }
+  }
+</style>
+
+<div class="container">
+  <h2>🏢 Branch List</h2>
+
+  <div class="d-flex flex-wrap justify-content-between mb-3">
+    <a href="{% url 'branch_create' %}" class="btn btn-success">➕ Add Branch</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">🔙 Back to Dashboard</a>
+  </div>
+
+  {% if branches %}
+    <ul class="list-group">
+      {% for branch in branches %}
+        <li class="list-group-item">
+          {{ branch.name }}
+          <span>
+            <a href="{% url 'branch_edit' branch.slug %}" class="btn btn-sm btn-primary">✏️ Edit</a>
+            <a href="{% url 'branch_delete' branch.slug %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this branch?')">🗑️ Delete</a>
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="no-branch-msg">🚫 No branches found.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% block title %}📋 Designation List{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #fdf2e9, #e0f2fe, #e8eaf6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-weight: bold;
+    color: #0d6efd;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .btn-success {
+    background-color: #34d399;
+    border: none;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    margin-right: 10px;
+  }
+
+  .btn-success:hover {
+    background-color: #059669;
+    transform: scale(1.05);
+  }
+
+  .btn-secondary {
+    border-radius: 10px;
+    font-weight: 600;
+  }
+
+  .list-group-item {
+    background-color: #f9fafb;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .list-group-item:hover {
+    background-color: #e0f7fa;
+    transform: translateY(-2px);
+  }
+
+  .btn-sm {
+    border-radius: 8px;
+    font-weight: 600;
+    margin: 4px;
+    font-size: 0.875rem;
+  }
+
+  .btn-primary {
+    background-color: #3b82f6;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+
+  .btn-danger {
+    background-color: #ef4444;
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #dc2626;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    .list-group-item {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 0.95rem;
+    }
+
+    .list-group-item span {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      width: 48%;
+      margin: 5px 1%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .btn-sm {
+      width: 100%;
+      margin: 6px 0;
+    }
+  }
+</style>
+
+<div class="container mt-5">
+  <h2>📋 Designation List</h2>
+
+  <div class="button-group">
+    <a href="{% url 'designation_create' %}" class="btn btn-success">➕ Add Designation</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">🔙 Back to Dashboard</a>
+  </div>
+
+  {% if designations %}
+    <ul class="list-group">
+      {% for designation in designations %}
+        <li class="list-group-item">
+          {{ designation.name }}
+          <span>
+            <a href="{% url 'designation_edit' designation.slug %}" class="btn btn-sm btn-primary">✏️ Edit</a>
+            <a href="{% url 'designation_delete' designation.slug %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted text-center">No designations found.</p>
+  {% endif %}
+</div>
+{% endblock %}

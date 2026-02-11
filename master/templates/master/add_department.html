@@ -1,0 +1,13 @@
+
+
+{% block content %}
+  <h2>➕ Add Department</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <label for="name">Department Name:</label>
+    <input type="text" name="name" id="name" required>
+    <br><br>
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}

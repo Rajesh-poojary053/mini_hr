@@ -1,0 +1,13 @@
+
+{% block title %}➕ Add Category{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">📂 Add Category</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save Category</button>
+  </form>
+</div>
+{% endblock %}

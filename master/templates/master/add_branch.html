@@ -1,0 +1,13 @@
+
+{% block title %}➕ Add Branch{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">🏢 Add Branch</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save Branch</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OTP Verify</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(270deg, #ff6a00, #ee0979, #00c6ff, #0072ff);
+      background-size: 800% 800%;
+      animation: floatBG 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    @keyframes floatBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .otp-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 35px;
+      border-radius: 14px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+    }
+
+    h3 {
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: #007BFF;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px 0;
+      background: #007BFF;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 15px rgba(0, 123, 255, 0.35);
+    }
+
+    button:hover {
+      background: #0056b3;
+      box-shadow: 0 10px 20px rgba(0, 86, 179, 0.45);
+    }
+
+    .alert {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .alert-error, .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    @media (max-width: 480px) {
+      .otp-container {
+        padding: 25px 20px;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 10px;
+      }
+
+      input[type="text"] {
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="otp-container">
+    <h3>Enter OTP sent to {{ user.email }}</h3>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="otp" placeholder="Enter OTP" required autofocus />
+      <button type="submit">🔐 Verify</button>
+    </form>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</body>
+</html>
